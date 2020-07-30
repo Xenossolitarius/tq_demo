@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <header>
-
-    </header>
+    <Header/>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -11,7 +9,21 @@
   </div>
 </template>
 
+<script>
+import Header from './components/Header'
+export default {
+  name: 'App',
+  components: {
+    Header,
+  }
+}
+</script>
+
 <style lang="scss">
+body{
+  margin: 0;
+}
+
 #app {
   font-family: 'Lato';
   -webkit-font-smoothing: antialiased;
@@ -19,12 +31,6 @@
   text-align: center;
   background-color: $background-color;
   color: $text-color;
-}
-
-header{
-  width: 100%;
-  height: 40px;
-  background-color: $main-color;
 }
 
 #nav {

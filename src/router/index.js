@@ -6,9 +6,10 @@ Vue.use(VueRouter)
 
   const routes = [
   {
-    path: '/',
+    path: '/:filter?',
     name: 'Home',
-    component: Home
+    component: Home,
+    
   },
   {
     path: '/about',

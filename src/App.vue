@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <header>
+
+    </header>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -10,11 +13,18 @@
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Lato';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  background-color: $background-color;
+  color: $text-color;
+}
+
+header{
+  width: 100%;
+  height: 40px;
+  background-color: $main-color;
 }
 
 #nav {

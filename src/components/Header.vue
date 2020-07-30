@@ -39,13 +39,14 @@ header{
 
     .tq-logo{
         width: 180px;
-        height: calc(100% / 3);
+        height: 20px;
         margin-top: 19px;
 
         @media #{$mq-mobile} {
+            width: 150px;
+            height: 17px;
             margin-top: 15px;
         }
     }
-
 }
 </style>

@@ -9,6 +9,7 @@
             <router-link :to="{ name: 'Home', params: { filter: filter.ROUTE}}">{{filter.NAME}}</router-link>
         </li>
     </ul>
+    <hr class="nav__separator">
 </nav>
 </template>
 
@@ -24,7 +25,10 @@ export default {
 <style lang="scss">
 .nav {
     margin-top: 50px;
-    margin-bottom: 48px;
+
+    @media #{$mq-mobile} {
+        margin-top: 16px;
+    }
 
     &__list {
         list-style: none;
@@ -33,6 +37,11 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-bottom: 48px;
+
+        @media #{$mq-mobile} {
+            margin-bottom: 17px;
+        }
 
         &__link {
             font-weight: bold;
@@ -40,13 +49,15 @@ export default {
 
             a {
                 text-decoration: none;
-                height: 22px;
                 font-size: 18px;
                 letter-spacing: 0;
-                line-height: 22px;
+
+                @media #{$mq-mobile} {
+                    font-size: 14px;
+                }
             }
 
-            &::after{
+            &::after {
                 content: "";
                 display: inline-block;
                 height: 15px;
@@ -59,6 +70,17 @@ export default {
                 border-right: 0px;
                 margin: 0;
             }
+        }
+    }
+
+    &__separator {
+        box-sizing: border-box;
+        height: 2px;
+        margin: 0 90px;
+        border: 1px solid $main-color;
+
+        @media #{$mq-mobile} {
+            margin: 0 27px;
         }
     }
 }

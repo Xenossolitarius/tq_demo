@@ -3,8 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Fragment from 'vue-fragment'
+import Vuelidate from 'vuelidate'
 
 Vue.use(Fragment.Plugin)
+Vue.use(Vuelidate)
 
 Vue.config.productionTip = false
 

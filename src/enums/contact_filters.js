@@ -1,6 +1,6 @@
 const contact_filters = {
     DEFAULT: {
-        ROUTE: '',
+        ROUTE: null,
         NAME: 'All contacts'
     },
     FAVORITE: {

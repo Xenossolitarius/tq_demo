@@ -7,7 +7,7 @@
 
 <script>
 import Navigation from '@/components/Navigation'
-import Contacts from '@/components/contact/Contacts'
+import Contacts from '@/components/contacts/Contacts'
 
 export default {
   name: 'Home',

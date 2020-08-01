@@ -1,16 +1,19 @@
 <template>
   <div class="contacts">
     <SearchInput/>
+    <ContactList/>
   </div>
 </template>
 
 <script>
-import SearchInput from '@/components/contact/SearchInput'
+import SearchInput from '@/components/contacts/SearchInput'
+import ContactList from '@/components/contacts/ContactList'
 export default {
-    name: "Contacts",
-    components: {
-      SearchInput
-    }
+  name: "Contacts",
+  components: {
+    SearchInput,
+    ContactList
+  }
 }
 </script>
 

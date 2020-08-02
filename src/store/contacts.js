@@ -30,7 +30,7 @@ const contacts = {
                 })
             }
             if(filter.nameFull){
-                tempContacts = tempContacts.filter((x) => {
+                tempContacts = tempContacts.filter( x => {
                     return x.nameFull.toLowerCase().includes(filter.nameFull.toLowerCase())
                 })
             }   
@@ -38,6 +38,9 @@ const contacts = {
         },
         getContacts: state => {
             return state.contacts
+        },
+        getContact: state => shorthand => {
+            return state.contacts.filter( x => x.shorthand == shorthand).pop()
         }
     }
 }

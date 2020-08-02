@@ -1,13 +1,15 @@
 <template>
   <div class="contacts__list" ref="content_size">
       <div class="contacts__list__wrapper" :style="styleObject">
-            <Contact v-for="contact in contacts" :key="contact.id" :contact="contact"/>
+            <NewContact/>
+            <Contact v-for="contact in contacts" :key="contact.shorthand" :contact="contact"/>
       </div>
   </div>
 </template>
 
 <script>
 import Contact from '@/components/contacts/Contact'
+import NewContact from '@/components/contacts/NewContact'
 import { throttle } from '@/scripts/helpers.js'
 export default {
     name: 'ContactList',
@@ -19,7 +21,8 @@ export default {
         }
     },
     components: {
-        Contact
+        Contact,
+        NewContact
     },
     throttle,
     data(){

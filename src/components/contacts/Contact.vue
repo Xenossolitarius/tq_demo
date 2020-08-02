@@ -1,10 +1,10 @@
 <template>
-  <div class="contacts__contact">
-    <img class="contacts__contact__image" :src="contact.imgUrl"/>
-    <div class="contacts__contact__name">{{contact.nameFull}}</div>
+  <div class="contact" @click="redirectPortfolio($options.portfolio_modes.DEFAULT,contact)">
+    <img class="contact__image" :src="contact.imgUrl"/>
+    <div class="contact__name">{{contact.nameFull}}</div>
     <FavoriteControl :contact="contact"/>
-    <div class="contacts__contact__control">
-        <EditIcon @click="editContact(contact)"/>
+    <div class="contact__control">
+        <EditIcon @click="redirectPortfolio($options.portfolio_modes.EDIT,contact)"/>
         <TrashIcon @click="deleteContact(contact)"/>
     </div>
   </div>
@@ -14,8 +14,10 @@
 import EditIcon from '@/assets/svg/EditIcon'
 import TrashIcon from '@/assets/svg/TrashIcon'
 import FavoriteControl from '@/components/FavoriteControl'
+import PortfolioRedirect from '@/components/mixins/PortfolioRedirect'
 export default {
     name: 'Contact',
+    mixins: [PortfolioRedirect],
     components: {
         FavoriteControl,
         EditIcon,
@@ -28,10 +30,6 @@ export default {
         }
     },
     methods: {
-        editContact(contact){
-            console.log('edit')
-            console.log(contact)
-        },
         deleteContact(contact){
             console.log('delete')
             console.log(contact)
@@ -41,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss">
-.contacts__contact {
+.contact {
     position: relative;
     box-sizing: border-box;
     height: 150px;
@@ -53,11 +51,12 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 
     &:hover {
         border: 1px solid $main-color;
 
-        .contacts__contact__control {
+        .contact__control {
             opacity: 1;
         }
 

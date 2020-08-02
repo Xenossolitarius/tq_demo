@@ -1,5 +1,5 @@
 <template>
-  <svg @click="$emit('click')" class="edit-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
+  <svg @click.stop="$emit('click')" class="edit-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
     <!-- Generator: sketchtool 63.1 (101010) - https://sketch.com -->
     <title>Edit Icon</title>
     <desc>Created with sketchtool.</desc>

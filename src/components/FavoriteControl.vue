@@ -30,5 +30,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+.favorite__control__wrapper{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
 </style>

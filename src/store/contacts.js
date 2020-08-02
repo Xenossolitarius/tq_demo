@@ -1,4 +1,7 @@
 import mockContacts from '@/mock/mockData.js'
+import mockApi from '@/mock/mockApi.js'
+
+mockApi.set(mockContacts)
 
 const contacts = {
     state: () => ({
@@ -11,15 +14,27 @@ const contacts = {
         }
     },
     actions: {
-        fetchContacts(){
-
+        async fetchContacts(){
+            console.log('fetchContacs')
+            let data = await mockApi.get()
+            console.log(data)
+            return true
         }
     },
     getters: {
         filterContacts: state => filter => {
-            return state.contacts.filter((x)=>{
-                x.nameFull.includes(filter)
-            })
+            let tempContacts = state.contacts
+            if(filter.routeFilter){
+                tempContacts = tempContacts.filter( (contact) => {
+                    return contact[filter.routeFilter]
+                })
+            }
+            if(filter.nameFull){
+                tempContacts = tempContacts.filter((x) => {
+                    return x.nameFull.toLowerCase().includes(filter.nameFull.toLowerCase())
+                })
+            }   
+            return tempContacts
         },
         getContacts: state => {
             return state.contacts

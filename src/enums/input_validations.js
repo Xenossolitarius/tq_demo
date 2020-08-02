@@ -11,7 +11,6 @@ export const input_types = {
             minLength: minLength(3)
         }
     }
-
 }
 
 export const validation_messages = {

@@ -1,7 +1,7 @@
 <template>
   <div class="contacts">
-    <SearchInput/>
-    <ContactList :contacts="getContacts"/>
+    <SearchInput @input="filterEvent($event)"/>
+    <ContactList :contacts="filteredContacts"/>
   </div>
 </template>
 
@@ -12,11 +12,35 @@ import ContactList from '@/components/contacts/ContactList'
 export default {
   name: "Contacts",
   computed:{
-    ...mapGetters(['getContacts'])
+    ...mapGetters(['getContacts','filterContacts'])
+  },
+  data(){
+    return {
+      filter: {
+        nameFull: undefined,
+        routeFilter: undefined
+      },
+      filteredContacts: []
+    }
   },
   components: {
     SearchInput,
     ContactList
+  },
+  methods: {
+    filterEvent(inputValue){
+      this.filter.nameFull = inputValue
+      this.filter.routeFilter = this.$route.params.filter
+      this.filteredContacts = this.filterContacts(this.filter)
+    }
+  },
+  created(){
+    this.filterEvent()
+  },
+  watch: {
+    $route(){
+      this.filterEvent()
+    }
   }
 }
 </script>

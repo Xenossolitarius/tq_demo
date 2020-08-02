@@ -24,14 +24,9 @@ export default {
         Input
     },
     input_types,
-    data(){
-        return {
-            text: ''
-        }
-    },
     methods: {
         grabInput(value){
-            this.text = value
+            this.$emit('input', value)
         },
         doError(){
             console.log('there is error')

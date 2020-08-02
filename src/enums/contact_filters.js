@@ -7,7 +7,6 @@ const contact_filters = {
         ROUTE: 'favorite',
         NAME: 'My favorites'
     }
-
 }
 
 export default contact_filters;

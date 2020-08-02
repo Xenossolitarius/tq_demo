@@ -6,11 +6,20 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Header from './components/Header'
 export default {
   name: 'App',
   components: {
     Header,
+  },
+  methods: {
+    ...mapActions(['fetchContacts'])
+  },
+  async mounted(){
+    let works = await this.fetchContacts()
+    console.log('Mounted')
+    console.log(works)
   }
 }
 </script>

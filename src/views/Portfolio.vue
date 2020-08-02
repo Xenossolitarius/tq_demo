@@ -3,7 +3,6 @@
         <PortfolioImage :contact="contact" />
         <PortfolioData :contact="contact" v-if="mode === $options.portfolio_modes.DEFAULT"/>
         <PortfolioEdit :contact="contact" v-else />
-        
     </div>
 </template>
 
@@ -70,8 +69,7 @@ export default {
         height: 2px;
         width: 100%;
         border: 1px solid $main-color;
+        margin:0;
     }
-
-
 }
 </style>

@@ -14,32 +14,60 @@
                 <UserIcon/>
                 <span class="body__section__label__name">full name</span>
             </div>
+            <EditInput :initalValue="contact.nameFull" />
+        </div>
+        <hr class="portfolio__separator"/>
+        <div class="body__section">
+            <div class="body__section__label">
+                <EmailIcon/>
+                <span class="body__section__label__name">email</span>
+            </div>
+            <EditInput :initalValue="contact.email" />
+        </div>
+        <hr class="portfolio__separator"/>
+        <div class="body__section">
+            <div class="body__section__label">
+                <NumberIcon/>
+                <span class="body__section__label__name">number</span>
+            </div>
         </div>
     </div>
 </div>
 </template>
 
 <script>
-// import EmailIcon from '@/assets/svg/EmailIcon'
-// import NumberIcon from '@/assets/svg/NumberIcon'
+import EmailIcon from '@/assets/svg/EmailIcon'
+import NumberIcon from '@/assets/svg/NumberIcon'
 import UserIcon from '@/assets/svg/UserIcon'
 import ReturnIcon from '@/assets/svg/ReturnIcon'
 import TrashIcon from '@/assets/svg/TrashIcon'
+import EditInput from '@/components/materials/EditInput'
 export default {
-    name: 'PortfolioData',
+    name: 'PortfolioEdit',
         props: {
         contact: {
             type: Object,
-            required: true
+            required: false,
+            default: function() {
+                return {
+                    shorthand: '',
+                    imgUrl: null,
+                    nameFull: '',
+                    email: '',
+                    favorite: false,
+                    numbers: []
+                }
+            }
         }
     },
     components: {
-        // EmailIcon,
-        // NumberIcon,
+        EmailIcon,
+        NumberIcon,
         UserIcon,
         ReturnIcon,
         TrashIcon,
-    }
+        EditInput
+    },
 }
 </script>
 
@@ -72,10 +100,11 @@ export default {
 
     &__body{
         width: 100%;
-        padding-top: 17px;
         font-size: 16px;
 
         .body__section{
+            padding-top: 17px;
+
             &__label{
                 text-align: left;
                 margin-bottom: 22px;
@@ -85,6 +114,9 @@ export default {
                     font-weight: bold;
                     color: $main-color;
                 }
+            }
+            .edit__input{
+                margin-bottom: 30px;
             }
         }
     }

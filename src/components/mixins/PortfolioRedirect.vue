@@ -30,10 +30,7 @@ export default {
                 case modes.NEW:              
                     this.$router.push(
                         {
-                            name: 'Contact',
-                            params: {
-                                mode: modes.NEW
-                            }
+                            name: 'NewContact',
                         }
                     )
                     break

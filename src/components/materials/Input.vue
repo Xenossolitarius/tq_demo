@@ -24,6 +24,10 @@ export default {
         type: {
             type: Object,
             required: true,
+        },
+        initalValue: {
+            type: String,
+            required: false
         }
     },
     validation_messages,
@@ -49,6 +53,11 @@ export default {
             if(value){
                 this.$emit('onError')
             }
+        }
+    },
+    created(){
+        if(this.initalValue){
+            this.text = this.initalValue
         }
     }
 }

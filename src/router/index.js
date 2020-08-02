@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 
 const Portfolio = () => import(/* webpackChunkName: "sidepages" */ '../views/Portfolio.vue')
+const NewPortfolio = () => import(/* webpackChunkName: "sidepages" */ '../views/NewPortfolio.vue')
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,11 @@ Vue.use(VueRouter)
     name: 'Home',
     component: Home,
     
+  },
+  {
+    path: '/contact/new',
+    name: 'NewContact',
+    component: NewPortfolio,
   },
   {
     path: '/contact/:shorthand?/:mode?',

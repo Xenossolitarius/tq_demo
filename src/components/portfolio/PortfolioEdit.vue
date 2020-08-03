@@ -5,7 +5,7 @@
         <div class="portfolio__edit__header__delete">
             Delete
         </div>
-        <TrashIcon/>
+        <DeleteControl :contact="currentContact"/>
     </div>
     <hr class="portfolio__separator"/>
     <div class="portfolio__edit__body">
@@ -17,6 +17,7 @@
             <EditInput 
                 :value="currentContact.nameFull"
                 :placeholder="'full name'"
+                :type="$options.input_types.DEFAULT"
                 v-on:input="currentContact.nameFull = $event"
             />
         </div>
@@ -29,6 +30,7 @@
             <EditInput 
                 :value="currentContact.email" 
                 :placeholder="'email'"
+                :type="$options.input_types.EMAIL"
                 v-on:input="currentContact.email = $event"
             />
         </div>
@@ -48,11 +50,13 @@
                 <EditInput 
                     :value="number.number"
                     :placeholder="'number'"
+                    :type="$options.input_types.NUMBER"
                     v-on:input="number.number = $event"
                 />
                 <EditInput 
                     :value="number.desc"
                     :placeholder="'description'"
+                    :type="$options.input_types.NUMDESC"
                     v-on:input="number.desc = $event"
                 />
                 <RoundButton v-on:btn-click="removeNumber(number.id)"><CloseIcon/></RoundButton>
@@ -73,12 +77,14 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 import {makeId} from '@/scripts/helpers.js'
+import {input_types} from '@/enums/input_validations.js'
 import EmailIcon from '@/assets/svg/EmailIcon'
 import NumberIcon from '@/assets/svg/NumberIcon'
 import UserIcon from '@/assets/svg/UserIcon'
 import ReturnIcon from '@/assets/svg/ReturnIcon'
-import TrashIcon from '@/assets/svg/TrashIcon'
+import DeleteControl from '@/components/DeleteControl'
 import CloseIcon from '@/assets/svg/CloseIcon'
 import AddIcon from '@/assets/svg/AddIcon'
 import EditInput from '@/components/materials/EditInput'
@@ -88,6 +94,7 @@ import WideButton from '@/components/materials/WideButton'
 export default {
     name: 'PortfolioEdit',
     makeId,
+    input_types,
     props: {
         contact: {
             type: Object,
@@ -114,7 +121,7 @@ export default {
         NumberIcon,
         UserIcon,
         ReturnIcon,
-        TrashIcon,
+        DeleteControl,
         CloseIcon,
         AddIcon,
         EditInput,
@@ -128,6 +135,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['createContact','updateContact']),
         removeNumber(id){
             this.currentContact.numbers = this.currentContact.numbers.filter( num => num.id != id)
         },
@@ -138,9 +146,13 @@ export default {
                 desc: ''
             })
         },
-        submitContact(){
-            console.log(this.$options.makeId())
-            console.log(this.currentContact)
+        async submitContact(){
+            if(this.currentContact.shorthand === ''){
+                await this.createContact(this.currentContact)
+            }else{
+                await this.updateContact(this.currentContact)
+            }
+            this.$router.push({name: 'Home'})
         }
     },
     created(){
@@ -200,6 +212,7 @@ export default {
             }
             .edit__input{
                 margin-bottom: 30px;
+                max-width: 300px;
             }
 
             .number__edit__section{
@@ -229,17 +242,29 @@ export default {
                     }
                 }
 
-                & > .edit__input:last-of-type{
-                    width: 240px;
-                    margin-left: 30px;
+                .edit__input{
+                    display: inline-block;
+                    max-width: 300px;
+                    width: 100%;
+                    
                     input{
-                        width: 240px;
+                        display: block;
+                    }
+            
+                    &:last-of-type{
+                        margin-left: 30px;
+                        max-width: 240px;
+                        
+                        input{
+                            text-transform: uppercase;
+                        }
                     }
                 }
 
                 .round__button{
                     margin-top: 13px;
                     margin-left: 30px;
+                    min-width: 30px;
 
                     svg g{
                         fill: $search-input-border-color;

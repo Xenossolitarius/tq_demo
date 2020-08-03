@@ -1,14 +1,35 @@
-import { required, minLength } from 'vuelidate/lib/validators'
+import { required,email,minValue } from 'vuelidate/lib/validators'
 
 export const input_types = {
     DEFAULT: {
+        NAME: 'Text',
+        VALIDATORS: {
+            required,
+        }
     },
     SEARCH: {
         NAME: 'Search',
-        LENGTH: 3,
-        VALIDATORS:{
-            required,
-            minLength: minLength(3)
+        VALIDATORS: {
+        }
+    },
+    EMAIL: {
+        NAME: 'Email',
+        VALIDATORS: {
+            email,
+            required
+        }
+    },
+    NUMBER: {
+        NAME: 'Number',
+        VALIDATORS: {
+            minValue: minValue(9),
+            required
+        }
+    },
+    NUMDESC: {
+        NAME: 'Description',
+        VALIDATORS: {
+            required
         }
     }
 }

@@ -75,6 +75,7 @@ export default {
     box-sizing: border-box;
     height: 186px;
     width: 186px;
+    min-width: 186px;
     border: 3px solid fade-out( $contact-border-color, 0.7 );
     border-radius: 50%;
     position: relative;

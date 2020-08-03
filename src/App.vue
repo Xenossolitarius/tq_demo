@@ -2,16 +2,24 @@
   <div id="app">
     <Header/>
     <router-view/>
+    <ModalHandler v-if="currentModal !== $options.modal_types.OFF"/>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import Header from './components/Header'
+import { mapActions,mapGetters } from 'vuex'
+import modal_types from '@/enums/modal_types.js'
+import Header from '@/components/Header'
+import ModalHandler from '@/components/overlays/ModalHandler'
 export default {
   name: 'App',
+  modal_types,
   components: {
     Header,
+    ModalHandler,
+  },
+  computed: {
+    ...mapGetters(['currentModal']),
   },
   methods: {
     ...mapActions(['fetchContacts'])
@@ -27,6 +35,11 @@ export default {
 <style lang="scss">
 body{
   margin: 0;
+  font-family: 'Lato';
+}
+
+*{
+  font-family: 'Lato';
 }
 
 #app {

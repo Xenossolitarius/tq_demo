@@ -1,5 +1,5 @@
 <template>
-  <svg  @click="$emit('click')" class="trash-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13px" height="17px" viewBox="0 0 13 17" version="1.1">
+  <svg  @click.stop="$emit('click')" class="trash-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13px" height="17px" viewBox="0 0 13 17" version="1.1">
     <!-- Generator: sketchtool 63.1 (101010) - https://sketch.com -->
     <title>Trash icon</title>
     <desc>Created with sketchtool.</desc>

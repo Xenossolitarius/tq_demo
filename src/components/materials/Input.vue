@@ -7,11 +7,11 @@
         @input="setText($event.target.value)"
         :placeholder="placeholder"
     >
-    <div class="error" v-if="!$v.text.required">
-        {{this.$options.validation_messages.REQUIRED()}}
+    <div class="error" v-if="$v.text.required === false">
+        {{$options.validation_messages.REQUIRED()}}
     </div>
-    <div class="error" v-if="!$v.text.minLength">
-        {{this.$options.validation_messages.MINLENGTH(this.type.NAME,this.type.LENGTH)}}
+    <div class="error" v-else-if="$v.text.minLength === false">
+        {{$options.validation_messages.MINLENGTH(this.type.NAME,$v.text.minLength.min)}}
     </div>
 </fragment>
 </template>

@@ -5,23 +5,23 @@
     <FavoriteControl :contact="contact"/>
     <div class="contact__control">
         <EditIcon @click="redirectPortfolio($options.portfolio_modes.EDIT,contact)"/>
-        <TrashIcon @click="deleteContact(contact)"/>
+        <DeleteControl :contact="contact"/>
     </div>
   </div>
 </template>
 
 <script>
 import EditIcon from '@/assets/svg/EditIcon'
-import TrashIcon from '@/assets/svg/TrashIcon'
 import FavoriteControl from '@/components/FavoriteControl'
+import DeleteControl from '@/components/DeleteControl'
 import PortfolioRedirect from '@/components/mixins/PortfolioRedirect'
 export default {
     name: 'Contact',
     mixins: [PortfolioRedirect],
     components: {
+        DeleteControl,
         FavoriteControl,
         EditIcon,
-        TrashIcon
     },
     props: {
         contact: {
@@ -29,12 +29,6 @@ export default {
             required: true
         }
     },
-    methods: {
-        deleteContact(contact){
-            console.log('delete')
-            console.log(contact)
-        }
-    }
 }
 </script>
 

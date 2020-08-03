@@ -1,19 +1,18 @@
 <template>
 <div class="edit__input">
     <Input
-        :type="$options.input_types.SEARCH"
+        :type="type"
         @input="grabInput($event)"
         @onError="doError()"
         :value="value"
         :placeholder="placeholder"
-        
     />
 </div>
 </template>
 
 <script>
 import Input from '@/components/materials/Input'
-import { input_types } from '@/enums/input_validations.js'
+
 
 export default {
     name: 'EditInput',
@@ -25,12 +24,15 @@ export default {
         placeholder: {
             type: String,
             require: false
-        }
+        },
+        type: {
+            type: Object,
+            required: true,
+        },
     },
     components: {
         Input
     },
-    input_types,
     methods: {
         grabInput(value){
             this.$emit('input', value)
@@ -44,17 +46,17 @@ export default {
 
 <style lang="scss">
 .edit__input {
+    position: relative;
+
     input{
         font-family: 'Lato';
         font-size: 14px;
         box-sizing: border-box;
         height: 60px;
-        width: 300px;
+        width: 100%;
         border: 1px solid $search-input-border-color;
         border-radius: 4px;
         background-color: $background-color;
-        display: flex;
-        align-items: center;
 
         &::placeholder{
             opacity: 0.5;
@@ -80,6 +82,7 @@ export default {
     }
 
     .error{
+        position: absolute;
         text-align: left;
         opacity: 0.7;
         font-size: 14px;

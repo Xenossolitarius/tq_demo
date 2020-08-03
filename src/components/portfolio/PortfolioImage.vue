@@ -1,10 +1,14 @@
 <template>
-<div class="portfolio__image" :class="image ? '' : 'empty'">
-    <img :src="image" v-if="image">
-    <div class="overlay image" v-if="image">
+<div 
+    class="portfolio__image" 
+    :class="image ? '' : 'empty'"
+    >
+    <img class="profile__img" :src="image" v-if="image">
+    <input @change="imageHandle" class="file-input" type="file" accept="image/*" ref="file_input">
+    <div class="overlay image" v-if="image" @click="removeImage()">
         <CloseIconLarge/>
     </div>
-    <div class="overlay no-image" v-else>
+    <div class="overlay no-image" @click="imageUpload" v-else>
         <UploadIcon/>
     </div>
 </div>
@@ -23,6 +27,11 @@ export default {
         contact: {
             type: Object,
             required: false
+        },
+        allowEdit: {
+            type: Boolean,
+            required: false,
+            default: false
         }
     },
     data(){
@@ -30,9 +39,32 @@ export default {
             image: null
         }
     },
+    methods: {
+        removeImage(){
+            this.image = null;
+            this.$emit('newImage', this.image)
+        },
+        imageUpload(){
+            this.$refs.file_input.click()
+        },
+        imageHandle(e){
+            const selectedImage = e.target.files[0]
+            this.createBase64Image(selectedImage)
+        },
+        createBase64Image(fileObject){
+            const reader = new FileReader()
+
+            reader.readAsDataURL(fileObject)
+
+            reader.onload = (e) => {
+                this.image = e.target.result;
+                this.$emit('newImage', this.image)
+            }
+        }
+    },
     created(){
         if(this.contact){
-            this.image= this.contact.imgUrl
+            this.image = this.contact.imgUrl
         }
     }
 }
@@ -49,8 +81,17 @@ export default {
     overflow: hidden;
     cursor: pointer;
 
+    .profile__img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .file-input{
+        display: none;
+    }
+
     &.empty{
-        background-color: $main-color;
+        background-color: fade-out($main-color,0.6);
     }
     
 

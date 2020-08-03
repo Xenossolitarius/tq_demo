@@ -102,6 +102,11 @@ export default {
                     numbers: []
                 }
             }
+        },
+        newImage: {
+            type: String,
+            required: false,
+            default: ''
         }
     },
     components: {
@@ -119,7 +124,7 @@ export default {
     data(){
         return{
             activeNumIndex: null,
-            currentContact: null
+            currentContact: null,
         }
     },
     methods: {
@@ -140,6 +145,11 @@ export default {
     },
     created(){
         this.currentContact = Object.assign({},this.contact)
+    },
+    watch: {
+        newImage: function(val){
+            this.currentContact.imgUrl = val
+        }
     }
 }
 </script>
@@ -148,7 +158,7 @@ export default {
 .portfolio__edit{
     max-width: 630px;
     width: 100%;
-    margin-left: 31px;
+    margin-left: 30px;
 
     &__header{
         display: flex;

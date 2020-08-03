@@ -1,8 +1,13 @@
 <template>
     <div class="portfolio">
-        <PortfolioImage :contact="contact" />
-        <PortfolioData :contact="contact" v-if="mode === $options.portfolio_modes.DEFAULT"/>
-        <PortfolioEdit :contact="contact" v-else />
+        <PortfolioImage
+            :key="$route.path" 
+            :contact="contact" 
+            :allowEdit="mode === $options.portfolio_modes.EDIT"
+            v-on:newImage="newImage = $event"
+        />
+        <PortfolioData :contact="contact" v-if="mode === $options.portfolio_modes.DEFAULT" />
+        <PortfolioEdit :contact="contact" :newImage="newImage" v-else />
     </div>
 </template>
 
@@ -27,11 +32,11 @@ export default {
         return {
             contact: null,
             mode: null,
+            newImage: undefined,
         }
     },
     methods: {
         updateSettings(){
-            console.log(this.$route)
             const { shorthand, mode } = this.$route.params
             if(mode){
                 this.mode = mode

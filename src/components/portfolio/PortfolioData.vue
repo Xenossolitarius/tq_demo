@@ -72,7 +72,7 @@ export default {
 .portfolio__data{
     max-width: 630px;
     width: 100%;
-    margin-left: 28px;
+    margin-left: 30px;
 
     &__header{
         display: flex;

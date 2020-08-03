@@ -1,7 +1,7 @@
 <template>
 <div 
     class="portfolio__image" 
-    :class="image ? '' : 'empty'"
+    :class="[image ? '' : 'empty', allowEdit ? 'allowEdit' : '']"
     >
     <img class="profile__img" :src="image" v-if="image">
     <input @change="imageHandle" class="file-input" type="file" accept="image/*" ref="file_input">
@@ -80,6 +80,11 @@ export default {
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    pointer-events: none;
+
+    &.allowEdit{
+        pointer-events: auto;
+    }
 
     .profile__img{
         width: 100%;

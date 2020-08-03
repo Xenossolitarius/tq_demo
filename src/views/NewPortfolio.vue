@@ -1,7 +1,7 @@
 <template>
     <div class="portfolio">
-        <PortfolioImage />
-        <PortfolioEdit />
+        <PortfolioImage :allowEdit="true" v-on:newImage="newImage = $event" />
+        <PortfolioEdit :newImage="newImage" />
     </div>
 </template>
 
@@ -18,8 +18,10 @@ export default {
     computed: {
         ...mapGetters(['getContact']),
     },
-    created(){
-        console.log(this.$route)
+    data(){
+        return {
+            newImage: undefined
+        }
     }
 }
 </script>

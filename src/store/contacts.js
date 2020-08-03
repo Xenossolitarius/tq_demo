@@ -11,14 +11,37 @@ const contacts = {
     mutations: {
         SET_CONTACTS: (state) => {
             return state
+        },
+        DELETE_CONTACT: (state) => {
+            return state
+        },
+        CREATE_CONTACT: (state) => {
+            return state
+        },
+        UPDATE_CONTACT: (state) => {
+            return state
+        },
+        TOGGLE_FAVORITE: (state) => {
+            return state
         }
     },
     actions: {
         async fetchContacts(){
-            console.log('fetchContacs')
             let data = await mockApi.get()
             console.log(data)
             return true
+        },
+        async createContact(){
+
+        },
+        async updateContact(){
+
+        },
+        async deleteContact(){
+
+        },
+        async toggleFavorite(){
+
         }
     },
     getters: {

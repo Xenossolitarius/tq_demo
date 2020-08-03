@@ -14,7 +14,11 @@
                 <UserIcon/>
                 <span class="body__section__label__name">full name</span>
             </div>
-            <EditInput :initalValue="contact.nameFull" />
+            <EditInput 
+                :value="currentContact.nameFull"
+                :placeholder="'full name'"
+                v-on:input="currentContact.nameFull = $event"
+            />
         </div>
         <hr class="portfolio__separator"/>
         <div class="body__section">
@@ -22,14 +26,47 @@
                 <EmailIcon/>
                 <span class="body__section__label__name">email</span>
             </div>
-            <EditInput :initalValue="contact.email" />
+            <EditInput 
+                :value="currentContact.email" 
+                :placeholder="'email'"
+                v-on:input="currentContact.email = $event"
+            />
         </div>
         <hr class="portfolio__separator"/>
-        <div class="body__section">
+        <div class="body__section" @click.capture="activeNumIndex = null">
             <div class="body__section__label">
                 <NumberIcon/>
                 <span class="body__section__label__name">number</span>
             </div>
+             <div 
+                class="number__edit__section" 
+                v-for="(number,index) in currentContact.numbers" 
+                :key="index+number.number+number.desc"
+                @click="activeNumIndex = index"
+                :class="activeNumIndex == index ? 'active': ''"
+            >
+                <EditInput 
+                    :value="number.number"
+                    :placeholder="'number'"
+                    v-on:input="number.number = $event"
+                />
+                <EditInput 
+                    :value="number.desc"
+                    :placeholder="'description'"
+                    v-on:input="number.desc = $event"
+                />
+                <RoundButton v-on:btn-click="removeNumber(index)"><CloseIcon/></RoundButton>
+            </div>
+            <div class="add__number__section">
+                <RoundButton v-on:btn-click="addNumber()"><AddIcon/></RoundButton>
+                <div class="add__number__section__label">
+                    Add number
+                </div>
+            </div>
+        </div>
+        <div class="body__control__section">
+            <WideButton class="cancel">Cancel</WideButton>
+            <WideButton class="save">Save</WideButton>
         </div>
     </div>
 </div>
@@ -41,10 +78,15 @@ import NumberIcon from '@/assets/svg/NumberIcon'
 import UserIcon from '@/assets/svg/UserIcon'
 import ReturnIcon from '@/assets/svg/ReturnIcon'
 import TrashIcon from '@/assets/svg/TrashIcon'
+import CloseIcon from '@/assets/svg/CloseIcon'
+import AddIcon from '@/assets/svg/AddIcon'
 import EditInput from '@/components/materials/EditInput'
+import RoundButton from '@/components/materials/RoundButton'
+import WideButton from '@/components/materials/WideButton'
+
 export default {
     name: 'PortfolioEdit',
-        props: {
+    props: {
         contact: {
             type: Object,
             required: false,
@@ -66,8 +108,32 @@ export default {
         UserIcon,
         ReturnIcon,
         TrashIcon,
-        EditInput
+        CloseIcon,
+        AddIcon,
+        EditInput,
+        RoundButton,
+        WideButton,
     },
+    data(){
+        return{
+            activeNumIndex: null,
+            currentContact: null
+        }
+    },
+    methods: {
+        removeNumber(index){
+            this.currentContact.numbers.splice(index,1)
+        },
+        addNumber(){
+            this.currentContact.numbers.push({
+                number: '',
+                desc: ''
+            })
+        },
+    },
+    created(){
+        this.currentContact = this.contact
+    }
 }
 </script>
 
@@ -118,8 +184,89 @@ export default {
             .edit__input{
                 margin-bottom: 30px;
             }
+
+            .number__edit__section{
+                display: flex;
+
+                &:hover{
+                    input{
+                        border-color: $main-color;
+                    }
+                    .round__button{
+                        border-color: $main-color;
+                        svg g{
+                            fill: $main-color;
+                        }
+                    }
+                }
+
+                &.active{
+                    input{
+                        border-color: $main-color;
+                    }
+                    .round__button{
+                        border-color: $main-color;
+                        svg g{
+                            fill: $main-color;
+                        }
+                    }
+                }
+
+                & > .edit__input:last-of-type{
+                    width: 240px;
+                    margin-left: 30px;
+                    input{
+                        width: 240px;
+                    }
+                }
+
+                .round__button{
+                    margin-top: 13px;
+                    margin-left: 30px;
+
+                    svg g{
+                        fill: $search-input-border-color;
+                    }
+                }
+            }
+
+            .add__number__section{
+                display: flex;
+                align-items: center;
+                .round__button{
+                    border-color: $main-color;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    svg{
+                        height: 12px;
+                        width: 12px;
+                        display: block;                        
+                    }
+                }
+
+                &__label{
+                    color: $main-color;
+                    font-family: 'Lato';
+                    font-size: 14px;
+                    margin-left: 15px;
+                }
+            }
+        }
+        .body__control__section{
+            text-align: left;
+            margin-top: 101px;
+            
+            .wide__button{
+                font-size: 14px;
+                font-family: 'Lato';
+                line-height: 42px;
+                &.save{
+                    float: right;
+                    background-color: $main-color;
+                }
+            }
         }
     }
 }
-
 </style>

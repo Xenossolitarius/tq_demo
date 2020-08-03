@@ -5,6 +5,7 @@
         class="tq-input"
         v-model.trim="text"
         @input="setText($event.target.value)"
+        :placeholder="placeholder"
     >
     <div class="error" v-if="!$v.text.required">
         {{this.$options.validation_messages.REQUIRED()}}
@@ -25,9 +26,13 @@ export default {
             type: Object,
             required: true,
         },
-        initalValue: {
+        value: {
             type: String,
             required: false
+        },
+        placeholder: {
+            type: String,
+            require: false
         }
     },
     validation_messages,
@@ -56,8 +61,8 @@ export default {
         }
     },
     created(){
-        if(this.initalValue){
-            this.text = this.initalValue
+        if(this.value){
+            this.text = this.value
         }
     }
 }

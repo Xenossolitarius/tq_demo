@@ -4,7 +4,8 @@
         :type="$options.input_types.SEARCH"
         @input="grabInput($event)"
         @onError="doError()"
-        :initalValue="initalValue"
+        :value="value"
+        :placeholder="placeholder"
         
     />
 </div>
@@ -17,9 +18,13 @@ import { input_types } from '@/enums/input_validations.js'
 export default {
     name: 'EditInput',
     props: {
-        initalValue: {
+        value: {
             type: String,
             required: false
+        },
+        placeholder: {
+            type: String,
+            require: false
         }
     },
     components: {
@@ -40,6 +45,9 @@ export default {
 <style lang="scss">
 .edit__input {
     input{
+        font-family: 'Lato';
+        font-size: 14px;
+        box-sizing: border-box;
         height: 60px;
         width: 300px;
         border: 1px solid $search-input-border-color;
@@ -47,6 +55,10 @@ export default {
         background-color: $background-color;
         display: flex;
         align-items: center;
+
+        &::placeholder{
+            opacity: 0.5;
+        }
 
         &:hover{
             border: 1px solid $main-color;
@@ -69,6 +81,8 @@ export default {
 
     .error{
         text-align: left;
+        opacity: 0.7;
+        font-size: 14px;
     }
 }
 </style>

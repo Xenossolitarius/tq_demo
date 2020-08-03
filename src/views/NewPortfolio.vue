@@ -38,7 +38,7 @@ export default {
         height: 2px;
         width: 100%;
         border: 1px solid $main-color;
-        margin:0;
+        margin: 0;
     }
 }
 </style>

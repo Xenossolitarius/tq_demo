@@ -139,7 +139,7 @@ export default {
         }
     },
     created(){
-        this.currentContact = this.contact
+        this.currentContact = Object.assign({},this.contact)
     }
 }
 </script>

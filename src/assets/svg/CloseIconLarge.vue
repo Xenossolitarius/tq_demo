@@ -1,0 +1,24 @@
+<template>
+<svg class="close-icon-large" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14px" height="14px" viewBox="0 0 14 14" version="1.1">
+    <!-- Generator: sketchtool 63.1 (101010) - https://sketch.com -->
+    <title>Close Icon Large</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Edit" transform="translate(-382.000000, -203.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Icon-/-remove" transform="translate(376.000000, 197.000000)">
+                <polygon id="Combined-Shape" points="13 11.8429162 7.21458088 6.05749706 6.05749706 7.21458088 11.8429162 13 6.05749706 18.7854191 7.21458088 19.9425029 13 14.1570838 18.7854191 19.9425029 19.9425029 18.7854191 14.1570838 13 19.9425029 7.21458088 18.7854191 6.05749706"/>
+            </g>
+        </g>
+    </g>
+</svg>
+</template>
+
+<script>
+export default {
+    name: 'CloseIconlarge'
+}
+</script>
+
+<style>
+
+</style>

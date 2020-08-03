@@ -40,10 +40,10 @@
             </div>
              <div 
                 class="number__edit__section" 
-                v-for="(number,index) in currentContact.numbers" 
-                :key="index+number.number+number.desc"
-                @click="activeNumIndex = index"
-                :class="activeNumIndex == index ? 'active': ''"
+                v-for="number in currentContact.numbers" 
+                :key="number.id"
+                @click="activeNumIndex = number.id"
+                :class="activeNumIndex === number.id ? 'active': ''"
             >
                 <EditInput 
                     :value="number.number"
@@ -55,7 +55,7 @@
                     :placeholder="'description'"
                     v-on:input="number.desc = $event"
                 />
-                <RoundButton v-on:btn-click="removeNumber(index)"><CloseIcon/></RoundButton>
+                <RoundButton v-on:btn-click="removeNumber(number.id)"><CloseIcon/></RoundButton>
             </div>
             <div class="add__number__section">
                 <RoundButton v-on:btn-click="addNumber()"><AddIcon/></RoundButton>
@@ -65,14 +65,15 @@
             </div>
         </div>
         <div class="body__control__section">
-            <WideButton class="cancel">Cancel</WideButton>
-            <WideButton class="save">Save</WideButton>
+            <WideButton class="cancel" v-on:btn-click="$router.go(-1)">Cancel</WideButton>
+            <WideButton class="save" v-on:btn-click="submitContact()">Save</WideButton>
         </div>
     </div>
 </div>
 </template>
 
 <script>
+import {makeId} from '@/scripts/helpers.js'
 import EmailIcon from '@/assets/svg/EmailIcon'
 import NumberIcon from '@/assets/svg/NumberIcon'
 import UserIcon from '@/assets/svg/UserIcon'
@@ -86,6 +87,7 @@ import WideButton from '@/components/materials/WideButton'
 
 export default {
     name: 'PortfolioEdit',
+    makeId,
     props: {
         contact: {
             type: Object,
@@ -121,15 +123,20 @@ export default {
         }
     },
     methods: {
-        removeNumber(index){
-            this.currentContact.numbers.splice(index,1)
+        removeNumber(id){
+            this.currentContact.numbers = this.currentContact.numbers.filter( num => num.id != id)
         },
         addNumber(){
             this.currentContact.numbers.push({
+                id: this.$options.makeId(),
                 number: '',
                 desc: ''
             })
         },
+        submitContact(){
+            console.log(this.$options.makeId())
+            console.log(this.currentContact)
+        }
     },
     created(){
         this.currentContact = this.contact
@@ -256,7 +263,8 @@ export default {
         .body__control__section{
             text-align: left;
             margin-top: 101px;
-            
+            padding-bottom: 81px;
+
             .wide__button{
                 font-size: 14px;
                 font-family: 'Lato';

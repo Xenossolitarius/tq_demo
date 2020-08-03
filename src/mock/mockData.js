@@ -7,10 +7,12 @@ const mockContacts = [
         favorite: false,
         numbers: [
             {
+                id: 'whyo4sHdHa',
                 number: '+385 21 546 456',
                 desc: 'mars',
             },
             {
+                id: 'nx2ogbLfv3',
                 number: '+385 98 6547 541',
                 desc: 'rocinante',
             }
@@ -24,10 +26,12 @@ const mockContacts = [
         favorite: true,
         numbers: [
             {
+                id: '1bYA3SLEYx',
                 number: '+385 21 546 456',
                 desc: 'earth',
             },
             {
+                id: 'W0Z0tWSrNg',
                 number: '+385 98 6547 541',
                 desc: 'rocinante',
             }
@@ -41,10 +45,12 @@ const mockContacts = [
         favorite: true,
         numbers: [
             {
+                id: 'HBLW2DPKHk',
                 number: '+385 98 6547 541',
                 desc: 'tycho station',
             },
             {
+                id: 'HDMoV5AUzN',
                 number: '+385 98 6547 541',
                 desc: 'belt',
             }
@@ -58,6 +64,7 @@ const mockContacts = [
         favorite: false,
         numbers: [
             {
+                id: 'aFk6E48eiy',
                 number: '+385 98 6547 541',
                 desc: 'earth',
             },
@@ -71,10 +78,12 @@ const mockContacts = [
         favorite: false,
         numbers: [
             {
+                id: 'QY6ovtw9sG',
                 number: '+385 98 6547 541',
                 desc: 'rocinante',
             },
             {
+                id: 'w7svQ2AYQj',
                 number: '+385 98 6547 541',
                 desc: 'belt',
             }
@@ -88,10 +97,12 @@ const mockContacts = [
         favorite: true,
         numbers: [
             {
+                id: 'HjtEXqHa76',
                 number: '+385 98 6547 541',
                 desc: 'earth',
             },
             {
+                id: 'rX8tvq7kRL',
                 number: '+385 98 6547 541',
                 desc: 'rocinante',
             }
@@ -105,10 +116,12 @@ const mockContacts = [
         favorite: true,
         numbers: [
             {
+                id: 'WN6woCYpze',
                 number: '+385 98 6547 541',
                 desc: 'mars',
             },
             {
+                id: 'ZuWBa5DuVC',
                 number: '+385 98 6547 541',
                 desc: 'earth',
             }

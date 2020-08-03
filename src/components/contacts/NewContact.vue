@@ -29,12 +29,23 @@ export default {
 
     .add_icon{
         margin-top: 52px;
+
+        @media #{$mq-mobile} {
+            margin-top: 0;
+            margin-left: 32px;
+        }
     }
 
     .new__label{
         color: $main-color;
         font-size: 16px;
         margin-top: 11px;
+
+        @media #{$mq-mobile} {
+            margin-top: 0;
+            font-size: 14px;
+            margin-left: 18px;
+        }
     }
 }
 </style>

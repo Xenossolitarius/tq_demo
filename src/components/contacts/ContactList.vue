@@ -1,18 +1,20 @@
 <template>
   <div class="contacts__list" ref="content_size">
       <div class="contacts__list__wrapper" :style="styleObject">
-            <NewContact/>
+            <NewContact v-if="isDefault"/>
             <Contact v-for="contact in contacts" :key="contact.shorthand" :contact="contact"/>
       </div>
   </div>
 </template>
 
 <script>
+import contact_filters from '@/enums/contact_filters.js'
 import Contact from '@/components/contacts/Contact'
 import NewContact from '@/components/contacts/NewContact'
 import { throttle } from '@/scripts/helpers.js'
 export default {
     name: 'ContactList',
+    contact_filters,
     props: {
         contacts: {
             type: Array,
@@ -25,6 +27,11 @@ export default {
         NewContact
     },
     throttle,
+    computed: {
+        isDefault(){
+            return this.$route.params.filter === this.$options.contact_filters.DEFAULT.ROUTE
+        }
+    },
     data(){
         return {
             styleObject:{
@@ -37,7 +44,7 @@ export default {
             let contentWidth = this.$refs.content_size.clientWidth
             let itemsPerRow = Math.floor(contentWidth / 300);
             let newSize = itemsPerRow * 300;
-            if( itemsPerRow > 0){
+            if( itemsPerRow > 1){
                 this.styleObject.width = `${newSize}px`
             }else{
                 this.styleObject.width = 'auto'
@@ -61,10 +68,16 @@ export default {
 <style lang="scss">
 .contacts__list{
     margin-top: 61px;
-    margin-left: 120px;
-    margin-right: 120px;
+    margin-left: 25px;
+    margin-right: 25px;
     display: flex;
     justify-content: center;
+
+    @media #{$mq-mobile} {
+        margin-top: 35px;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
 
     &__wrapper{
         display: flex;

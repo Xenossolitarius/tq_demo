@@ -1,6 +1,8 @@
 <template>
   <header>
-      <Logo/>
+      <router-link :to="'/'">
+        <Logo/>
+      </router-link>
   </header>
 </template>
 

@@ -47,13 +47,19 @@ export default {
     align-items: center;
     cursor: pointer;
 
+    @media #{$mq-mobile} {
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        margin: 0 0 10px 0;
+    }
+
     &:hover {
         border: 1px solid $main-color;
 
         .contact__control {
             opacity: 1;
         }
-
     }
 
     &__image {
@@ -63,6 +69,13 @@ export default {
         height: 66px;
         border: 3px solid fade-out( $contact-border-color, 0.7 );
         margin-top: 27px;
+
+        @media #{$mq-mobile} {
+            margin-top: 0px;
+            width: 46px;
+            height: 46px;
+            margin-left: 13px;
+        }
     }
 
     &__name {
@@ -71,6 +84,12 @@ export default {
         color: $text-color;
         font-weight: bold;
         letter-spacing: 0;
+
+        @media #{$mq-mobile} {
+            margin-top: 0px;
+            margin-left: 25px;
+            font-size: 14px;
+        }
     }
 
     &__control {
@@ -78,6 +97,14 @@ export default {
         right: 0;
         padding-top: 15px;
         opacity: 0;
+        display: flex;
+        align-items: center;
+
+        @media #{$mq-mobile} {
+            position: static;
+            padding-top: 0;
+            opacity: 1;
+        }
 
         .trash-icon {
             margin-right: 17px;
@@ -86,6 +113,12 @@ export default {
         .edit-icon {
             margin-right: 26px;
             cursor: pointer;
+
+            @media #{$mq-mobile} {
+                margin-right: 32px;
+                margin-left: 32px;
+                margin-top: 3px;
+            }
         }
     }
 
@@ -94,6 +127,12 @@ export default {
         left: 0;
         margin-left: 17px;
         margin-top: 15px;
+
+        @media #{$mq-mobile} {
+            position: static;
+            margin: 0;
+            margin-left: auto;
+        }
     }
 }
 </style>

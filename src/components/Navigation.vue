@@ -27,7 +27,8 @@ export default {
     margin-top: 50px;
 
     @media #{$mq-mobile} {
-        margin-top: 16px;
+        padding-top: 66px;
+        margin-top: 0px;
     }
 
     &__list {

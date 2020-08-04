@@ -95,6 +95,21 @@ export default {
 
     &.allowEdit{
         pointer-events: auto;
+
+        @media #{$mq-mobile} {
+            width: 156px;
+            height: 156px;
+            margin-left: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .overlay{
+            @media #{$mq-mobile} {
+                width: 156px;
+                height: 156px;
+            }
+        }
     }
 
     .profile__img{

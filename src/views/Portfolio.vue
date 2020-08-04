@@ -66,15 +66,27 @@ export default {
     justify-content: center;
     flex-flow: row nowrap;
     padding-top: 57px;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: 12px;
+    padding-right: 12px;
+
+    @media #{$mq-mobile} {
+        padding: 0;
+        justify-content: start;
+    }
 
     &__separator{
         box-sizing: border-box;
         height: 2px;
         width: 100%;
         border: 1px solid $main-color;
-        margin:0;
+        margin: 0;
+
+        @media #{$mq-mobile} {
+            display: block;
+            width: auto;
+            margin: 0 22px;
+            box-sizing: border-box;
+        }
     }
 }
 </style>

@@ -74,15 +74,32 @@ export default {
     width: 100%;
     margin-left: 30px;
 
+    @media #{$mq-mobile} {
+        margin-left: 0;
+        max-width: none;
+    }
+
     &__header{
         display: flex;
         padding-top: 33px;
         padding-bottom: 27px;
         align-items: center;
 
+        @media #{$mq-mobile} {
+            padding-top: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid $text-color;
+            margin-bottom: 98px;
+        }
+
         .return_icon{
             margin-left: 8px;
             cursor: pointer;
+
+            @media #{$mq-mobile} {
+                width: 16px;
+                margin-left: 30px;
+            }
         }
 
         &__label{
@@ -90,16 +107,34 @@ export default {
             color: $text-color;
             font-size: 28px;
             margin-left: 20px;
+
+            @media #{$mq-mobile} {
+                position: absolute;
+                top: 135px;
+                margin-left: 101px;
+                font-size: 21px;
+                height: 28px;
+                line-height: 28px;;
+            }
         }
 
         .favorite__control__wrapper{
             margin-left: auto;
+
+            @media #{$mq-mobile} {
+                margin-right: 34px;
+            }
+
         }
 
         .edit-icon{
             margin-left: 44px;  
             margin-top: 4px;
             cursor: pointer;
+
+            @media #{$mq-mobile} {
+                margin-right: 30px;
+            }
         }
     }
 
@@ -109,14 +144,29 @@ export default {
         padding-left: 64px;
         font-size: 16px;
 
+        @media #{$mq-mobile} {
+            box-sizing: border-box;
+            padding-top: 23px;
+            padding-left: 0;
+        }
+
         .data__wrapper{
             text-align: left;
             margin-bottom: 71px;
+
+            @media #{$mq-mobile} {
+                margin-bottom: 50px;
+                width: 280px;
+                margin-left: auto;
+                margin-right: auto;
+                
+            }
 
             .email-icon{
                 display: inline-block;
                 vertical-align: middle;
             }
+
 
             &__label{
                 display: inline-block;
@@ -124,10 +174,20 @@ export default {
                 color: $main-color;
                 font-weight: bold;
                 margin-left: 15px;
+
+                @media #{$mq-mobile} {
+                    margin-left: 9px;
+                }
             }
 
             &__addr{
                 color: $text-color;
+
+                @media #{$mq-mobile} {
+                    display: block;
+                    margin-top: 12px;
+                    margin-left: 22px;
+                }
             }
 
             &__numbers{
@@ -135,14 +195,29 @@ export default {
                 vertical-align: top;
                 color: $text-color;
 
+                @media #{$mq-mobile} {
+                    display: block;
+                    margin-left: 22px;
+                    margin-top: 22px;
+                }
+
                 &__number{
                     margin-bottom: 43px;
+
+                    @media #{$mq-mobile} {
+                        margin-bottom: 32px;
+                    }
+
                     .description{
                         display: inline-block;
                         font-size: 14px;
                         text-transform: uppercase;
                         font-weight: bold;
                         width: 89px;
+
+                        @media #{$mq-mobile} {
+                            width: 101px;
+                        }
                     }
 
                     .number{

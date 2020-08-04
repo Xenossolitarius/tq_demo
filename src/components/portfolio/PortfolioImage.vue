@@ -83,6 +83,16 @@ export default {
     cursor: pointer;
     pointer-events: none;
 
+    @media #{$mq-mobile} {
+        position: absolute;
+        top: 122px;
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        justify-self: start;
+        margin-left: 22px;
+    }
+
     &.allowEdit{
         pointer-events: auto;
     }
@@ -122,6 +132,11 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @media #{$mq-mobile} {
+            width: 56px;
+            height: 56px;
+        }
 
         .close-icon-large{
             opacity: 0;

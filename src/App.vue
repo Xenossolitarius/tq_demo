@@ -49,6 +49,7 @@ body{
   text-align: center;
   background-color: $background-color;
   color: $text-color;
+  position: relative;
 }
 
 a{

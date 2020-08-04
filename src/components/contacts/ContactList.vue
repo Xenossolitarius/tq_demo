@@ -1,7 +1,7 @@
 <template>
   <div class="contacts__list" ref="content_size">
       <div class="contacts__list__wrapper" :style="styleObject">
-            <NewContact v-if="isDefault"/>
+            <NewContact v-if="!isFavorite"/>
             <Contact v-for="contact in contacts" :key="contact.shorthand" :contact="contact"/>
       </div>
   </div>
@@ -28,8 +28,8 @@ export default {
     },
     throttle,
     computed: {
-        isDefault(){
-            return this.$route.params.filter === this.$options.contact_filters.DEFAULT.ROUTE
+        isFavorite(){
+            return this.$route.params.filter === this.$options.contact_filters.FAVORITE.ROUTE
         }
     },
     data(){

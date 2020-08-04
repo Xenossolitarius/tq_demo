@@ -13,6 +13,9 @@
     <div class="error" v-else-if="$v.text.minLength === false && isError">
         {{$options.validation_messages.MINLENGTH(this.type.NAME,$v.text.$params.minLength.min)}}
     </div>
+    <div class="error" v-else-if="$v.text.email === false && isError">
+        {{$options.validation_messages.EMAIL()}}
+    </div>
 </fragment>
 </template>
 

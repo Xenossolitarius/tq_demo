@@ -2,10 +2,10 @@
 <div class="portfolio__edit">
     <div class="portfolio__edit__header">
         <ReturnIcon @click="$router.go(-1)"/>
-        <div class="portfolio__edit__header__delete">
+        <div class="portfolio__edit__header__delete" v-if="!isNew">
             Delete
         </div>
-        <DeleteControl :contact="currentContact"/>
+        <DeleteControl :contact="currentContact" v-if="!isNew"/>
     </div>
     <hr class="portfolio__separator"/>
     <div class="portfolio__edit__body">
@@ -97,6 +97,7 @@
 import {mapActions} from 'vuex'
 import {makeId} from '@/scripts/helpers.js'
 import {input_types} from '@/enums/input_validations.js'
+import portfolio_modes from '@/enums/portfolio_modes.js'
 import EmailIcon from '@/assets/svg/EmailIcon'
 import NumberIcon from '@/assets/svg/NumberIcon'
 import UserIcon from '@/assets/svg/UserIcon'
@@ -112,6 +113,7 @@ export default {
     name: 'PortfolioEdit',
     makeId,
     input_types,
+    portfolio_modes,
     props: {
         contact: {
             type: Object,
@@ -131,6 +133,10 @@ export default {
             type: String,
             required: false,
             default: ''
+        },
+        mode: {
+            required: false,
+            default: null,
         }
     },
     components: {
@@ -156,6 +162,11 @@ export default {
             },
             invalid: false,
             loading: false,
+        }
+    },
+    computed:{
+        isNew(){
+            return this.mode === this.$options.portfolio_modes.NEW
         }
     },
     methods: {

@@ -36,6 +36,7 @@ export const input_types = {
 
 export const validation_messages = {
     REQUIRED: () => 'Field is required',
-    MINLENGTH: (name,number) => `${name} must have at least ${number} characters`
+    MINLENGTH: (name,number) => `${name} must have at least ${number} characters`,
+    EMAIL: () => `Email is not in correct format`
 }
 

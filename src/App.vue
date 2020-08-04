@@ -25,9 +25,9 @@ export default {
     ...mapActions(['fetchContacts'])
   },
   async mounted(){
-    let works = await this.fetchContacts()
-    console.log('Mounted')
-    console.log(works)
+    // let works = await this.fetchContacts()
+    // console.log('Mounted')
+    // console.log(works)
   }
 }
 </script>

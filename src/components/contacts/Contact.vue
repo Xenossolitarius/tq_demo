@@ -1,6 +1,6 @@
 <template>
   <div class="contact" @click="redirectPortfolio($options.portfolio_modes.DEFAULT,contact)">
-    <img class="contact__image" :src="contact.imgUrl"/>
+    <img class="contact__image" :src="contact.imgUrl || defaultImgURL"/>
     <div class="contact__name">{{contact.nameFull}}</div>
     <FavoriteControl :contact="contact"/>
     <div class="contact__control">
@@ -29,6 +29,11 @@ export default {
             required: true
         }
     },
+    computed: {
+        defaultImgURL(){
+            return '/default.png'
+        }
+    }
 }
 </script>
 

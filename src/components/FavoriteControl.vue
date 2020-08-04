@@ -1,7 +1,9 @@
 <template>
 <div class="favorite__control__wrapper" @click.stop="toggle(contact)">
-    <HeartFull v-if="contact.favorite" />
+    <Spinner :dark="true" v-if="loading" />
+    <HeartFull v-else-if="contact.favorite" />
     <HeartEmpty v-else />
+    
 </div>
 </template>
 
@@ -9,11 +11,13 @@
 import {mapActions} from 'vuex'
 import HeartEmpty from '@/assets/svg/HeartEmpty'
 import HeartFull from '@/assets/svg/HeartFull'
+import Spinner from '@/components/materials/Spinner'
 export default {
     name: 'FavoriteControl',
     components: {
         HeartEmpty,
-        HeartFull
+        HeartFull,
+        Spinner
     },
     props: {
         contact: {
@@ -21,13 +25,17 @@ export default {
             required: true
         }
     },
+    data(){
+        return {
+            loading: false,
+        }
+    },
     methods: {
         ...mapActions(['toggleFavorite']),
         async toggle(contact){
-            console.log('toggle')
-            console.log(contact)
+            this.loading = true
             await this.toggleFavorite(contact)
-            console.log('done')
+            this.loading = false
         }
     }
 }

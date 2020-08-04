@@ -1,14 +1,25 @@
 <template>
-    <div class="spinner"></div>
+    <div class="spinner" :class="dark ? 'dark' : ''"></div>
 </template>
 
 <script>
 export default {
-    name: 'Spinner'
+    name: 'Spinner',
+    props: {
+        dark: {
+            required: false,
+            default: false
+        }
+    }
 }
 </script>
 
 <style lang="scss">
+.spinner.dark,
+.spinner.dark:before,
+.spinner.dark:after{
+    background: $text-color;
+}
 .spinner,
 .spinner:before,
 .spinner:after {

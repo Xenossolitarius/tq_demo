@@ -1,16 +1,18 @@
 <template>
     <div class="portfolio">
         <PortfolioImage :allowEdit="true" v-on:newImage="newImage = $event" />
-        <PortfolioEdit :newImage="newImage" />
+        <PortfolioEdit :newImage="newImage" :mode="$options.portfolio_modes.NEW"/>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import portfolio_modes from '@/enums/portfolio_modes.js'
 import PortfolioEdit from '@/components/portfolio/PortfolioEdit'
 import PortfolioImage from '@/components/portfolio/PortfolioImage'
 export default {
     name: 'NewPortfolio',
+    portfolio_modes,
     components: {
         PortfolioEdit,
         PortfolioImage

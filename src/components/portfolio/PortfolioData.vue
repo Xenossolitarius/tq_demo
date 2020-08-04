@@ -124,7 +124,6 @@ export default {
             @media #{$mq-mobile} {
                 margin-right: 34px;
             }
-
         }
 
         .edit-icon{

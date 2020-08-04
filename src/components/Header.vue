@@ -1,9 +1,12 @@
 <template>
+<fragment>
   <header>
       <router-link :to="'/'">
         <Logo/>
       </router-link>
   </header>
+  <div class="mobile-padding"></div>
+</fragment>
 </template>
 
 <script>
@@ -28,6 +31,7 @@ header{
         height: 50px;
         box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
         position: fixed;
+        z-index: 1;
     }
 
     &:after{
@@ -51,6 +55,11 @@ header{
             height: 17px;
             margin-top: 15px;
         }
+    }
+}
+.mobile-padding{
+    @media #{$mq-mobile} {
+        padding-top: 50px;
     }
 }
 </style>

@@ -84,7 +84,7 @@ export default {
         @media #{$mq-mobile} {
             display: block;
             width: auto;
-            margin: 0 22px;
+            margin: 0 25px;
             box-sizing: border-box;
         }
     }

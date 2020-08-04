@@ -38,7 +38,7 @@
         <div class="body__section" @click.capture="activeNumIndex = null">
             <div class="body__section__label">
                 <NumberIcon/>
-                <span class="body__section__label__name">number</span>
+                <span class="body__section__label__name">numbers</span>
             </div>
              <div 
                 class="number__edit__section" 
@@ -172,24 +172,49 @@ export default {
     width: 100%;
     margin-left: 30px;
 
+    @media #{$mq-mobile} {
+        margin-left: 0;
+        max-width: none;
+    }
+
     &__header{
         display: flex;
         padding-top: 52px;
         padding-bottom: 23px;
         align-items: center;
 
+        @media #{$mq-mobile} {
+            padding-top: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid $text-color;
+            margin-bottom: 198px;
+        }
+
         .return_icon{
             margin-left: 8px;
             cursor: pointer;
+
+            @media #{$mq-mobile} {
+                width: 16px;
+                margin-left: 30px;
+            }
         }
 
         &__delete{
             font-size: 14px;
             margin-left: auto;
+
+            @media #{$mq-mobile} {
+                display: none;
+            }
         }
 
         .trash-icon{
             margin-left: 15px;
+            @media #{$mq-mobile} {
+                margin-left: auto;
+                margin-right: 31px;
+            }
         }
     }
 
@@ -197,26 +222,62 @@ export default {
         width: 100%;
         font-size: 16px;
 
+        @media #{$mq-mobile} {
+            padding: 0 25px;
+            width: auto;
+        }
+
+        .portfolio__separator{
+            @media #{$mq-mobile} {
+                margin: 0;
+            }
+        }
+
         .body__section{
             padding-top: 17px;
 
             &__label{
                 text-align: left;
                 margin-bottom: 22px;
+
+                @media #{$mq-mobile} {
+                    margin-bottom: 15px;
+                }
+
                 &__name{
                     margin-left: 15px;
                     font-size: 16px;
                     font-weight: bold;
                     color: $main-color;
+
+                    @media #{$mq-mobile} {
+                        font-size: 14px;
+                    }
                 }
             }
             .edit__input{
                 margin-bottom: 30px;
                 max-width: 300px;
+
+                @media #{$mq-mobile} {
+                    margin-bottom: 25px;
+                    max-width: none;
+                }
+
+                input{
+                    @media #{$mq-mobile} {
+                        width: 100%;
+                        margin: 0;
+                    }
+                }
             }
 
             .number__edit__section{
                 display: flex;
+                @media #{$mq-mobile} {
+                    margin-bottom: 10px;
+                    flex-flow: row wrap;
+                }
 
                 &:hover{
                     input{
@@ -243,9 +304,13 @@ export default {
                 }
 
                 .edit__input{
-                    display: inline-block;
                     max-width: 300px;
                     width: 100%;
+
+                    @media #{$mq-mobile} {
+                        margin-bottom: 10px;
+                        max-width: none;
+                    }
                     
                     input{
                         display: block;
@@ -254,6 +319,12 @@ export default {
                     &:last-of-type{
                         margin-left: 30px;
                         max-width: 240px;
+
+                        @media #{$mq-mobile} {
+                            margin-left: 0px;
+                            max-width: none;
+                            flex-basis: calc(100% - 48px)
+                        }
                         
                         input{
                             text-transform: uppercase;
@@ -265,6 +336,9 @@ export default {
                     margin-top: 13px;
                     margin-left: 30px;
                     min-width: 30px;
+                    @media #{$mq-mobile} {
+                        margin-left: 18px;
+                    }
 
                     svg g{
                         fill: $search-input-border-color;
@@ -275,6 +349,11 @@ export default {
             .add__number__section{
                 display: flex;
                 align-items: center;
+
+                @media #{$mq-mobile} {
+                    margin-top: 30px;
+                }
+
                 .round__button{
                     border-color: $main-color;
                     display: flex;
@@ -300,13 +379,25 @@ export default {
             margin-top: 101px;
             padding-bottom: 81px;
 
+            @media #{$mq-mobile} {
+                margin-top: 68px;
+                display: flex;
+                justify-content: space-around; 
+            }
+
             .wide__button{
                 font-size: 14px;
                 font-family: 'Lato';
                 line-height: 42px;
+
                 &.save{
                     float: right;
                     background-color: $main-color;
+
+                    @media #{$mq-mobile} {
+                        float: none;
+                        margin-left: 5px;
+                    }
                 }
             }
         }

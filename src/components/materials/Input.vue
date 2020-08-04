@@ -7,11 +7,11 @@
         @input="setText($event.target.value)"
         :placeholder="placeholder"
     >
-    <div class="error" v-if="$v.text.required === false">
+    <div class="error" v-if="$v.text.required === false && isError">
         {{$options.validation_messages.REQUIRED()}}
     </div>
-    <div class="error" v-else-if="$v.text.minLength === false">
-        {{$options.validation_messages.MINLENGTH(this.type.NAME,$v.text.minLength.min)}}
+    <div class="error" v-else-if="$v.text.minLength === false && isError">
+        {{$options.validation_messages.MINLENGTH(this.type.NAME,$v.text.$params.minLength.min)}}
     </div>
 </fragment>
 </template>
@@ -46,6 +46,11 @@ export default {
             text: this.type.VALIDATORS
         }
     },
+    computed: {
+        isError(){
+            return this.$v.text.$error
+        }
+    },
     methods: {
         setText(value){
             this.text = value
@@ -54,16 +59,17 @@ export default {
         }
     },
     watch: {
-        '$v.text.$error': function emitError(value){
-            if(value){
-                this.$emit('onError')
-            }
+        '$v.text.$invalid': function (value){    
+            this.$emit('invalid',value)
         }
     },
     created(){
         if(this.value){
             this.text = this.value
         }
+    },
+    mounted(){
+        this.$emit('invalid', this.$v.text.$invalid)
     }
 }
 </script>
@@ -85,6 +91,5 @@ export default {
         color: $text-color;
         opacity: 0.5;
     }
-    
 }
 </style>

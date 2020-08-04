@@ -18,7 +18,8 @@
                 :value="currentContact.nameFull"
                 :placeholder="'full name'"
                 :type="$options.input_types.DEFAULT"
-                v-on:input="currentContact.nameFull = $event"
+                @input="currentContact.nameFull = $event"
+                @invalid="currentValidation.nameFull = $event"
             />
         </div>
         <hr class="portfolio__separator"/>
@@ -31,7 +32,8 @@
                 :value="currentContact.email" 
                 :placeholder="'email'"
                 :type="$options.input_types.EMAIL"
-                v-on:input="currentContact.email = $event"
+                @input="currentContact.email = $event"
+                @invalid="currentValidation.email = $event"
             />
         </div>
         <hr class="portfolio__separator"/>
@@ -51,26 +53,41 @@
                     :value="number.number"
                     :placeholder="'number'"
                     :type="$options.input_types.NUMBER"
-                    v-on:input="number.number = $event"
+                    @input="number.number = $event"
+                    @invalid="updateNumVal(number.id,'number',$event)"
                 />
                 <EditInput 
                     :value="number.desc"
                     :placeholder="'description'"
                     :type="$options.input_types.NUMDESC"
-                    v-on:input="number.desc = $event"
+                    @input="number.desc = $event"
+                    @invalid="updateNumVal(number.id,'desc',$event)"
                 />
-                <RoundButton v-on:btn-click="removeNumber(number.id)"><CloseIcon/></RoundButton>
+                <RoundButton @btn-click="removeNumber(number.id)"><CloseIcon/></RoundButton>
             </div>
             <div class="add__number__section">
-                <RoundButton v-on:btn-click="addNumber()"><AddIcon/></RoundButton>
+                <RoundButton @btn-click="addNumber()"><AddIcon/></RoundButton>
                 <div class="add__number__section__label">
                     Add number
                 </div>
             </div>
         </div>
         <div class="body__control__section">
-            <WideButton class="cancel" v-on:btn-click="$router.go(-1)">Cancel</WideButton>
-            <WideButton class="save" v-on:btn-click="submitContact()">Save</WideButton>
+            <WideButton 
+                class="cancel" 
+                @btn-click="$router.go(-1)"
+            >
+                Cancel
+            </WideButton>
+            <WideButton 
+                class="save" 
+                :loading="loading" 
+                :active="true" 
+                :invalid="invalid"
+                @btn-click="submitContact()"
+            >
+                Save
+            </WideButton>
         </div>
     </div>
 </div>
@@ -132,36 +149,77 @@ export default {
         return{
             activeNumIndex: null,
             currentContact: null,
+            currentValidation: {
+                nameFull: false,
+                email: false,
+                numbers: []
+            },
+            invalid: false,
+            loading: false,
         }
     },
     methods: {
         ...mapActions(['createContact','updateContact']),
+        updateNumVal(id,key,value){
+            let index = this.currentValidation.numbers.findIndex( number => number.id === id )
+            this.currentValidation.numbers[index][key] = value
+        },
         removeNumber(id){
             this.currentContact.numbers = this.currentContact.numbers.filter( num => num.id != id)
+            this.currentValidation.numbers = this.currentValidation.numbers.filter( num => num.id != id)
         },
         addNumber(){
+            let idHolder = this.$options.makeId()
             this.currentContact.numbers.push({
-                id: this.$options.makeId(),
+                id: idHolder,
                 number: '',
                 desc: ''
             })
+            this.currentValidation.numbers.push({
+                id: idHolder,
+                number: false,
+                desc: false,
+            })
         },
         async submitContact(){
+            this.loading = true
             if(this.currentContact.shorthand === ''){
                 await this.createContact(this.currentContact)
             }else{
                 await this.updateContact(this.currentContact)
             }
+            this.loading = false
             this.$router.push({name: 'Home'})
         }
     },
     created(){
         this.currentContact = Object.assign({},this.contact)
+        this.currentValidation.numbers = this.contact.numbers.map((number) => { return {id: number.id, number: false, desc: false}})
     },
     watch: {
         newImage: function(val){
             this.currentContact.imgUrl = val
-        }
+        },
+        currentValidation:{
+            handler(val){
+                let invalid = false
+
+                Object.values(val).map(field => {
+                    if(typeof(field) === "boolean" && field){
+                        invalid = true
+                    }
+                })
+                val.numbers.map( number => {
+                    Object.values(number).map(field => {
+                        if(typeof(field) === "boolean" && field){
+                            invalid = true
+                        }
+                    })
+                })
+                this.invalid = invalid
+            },
+            deep: true
+        } 
     }
 }
 </script>
@@ -315,6 +373,10 @@ export default {
                     input{
                         display: block;
                     }
+
+                    .error{
+                        position: static;
+                    }
             
                     &:last-of-type{
                         margin-left: 30px;
@@ -378,6 +440,7 @@ export default {
             text-align: left;
             margin-top: 101px;
             padding-bottom: 81px;
+            max-height: 42px;
 
             @media #{$mq-mobile} {
                 margin-top: 68px;
@@ -392,7 +455,6 @@ export default {
 
                 &.save{
                     float: right;
-                    background-color: $main-color;
 
                     @media #{$mq-mobile} {
                         float: none;

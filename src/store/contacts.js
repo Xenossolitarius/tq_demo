@@ -14,7 +14,6 @@ const contacts = {
         },
         DELETE_CONTACT: (state,contact) => {
             let tempContacts = state.contacts.filter( x => x.shorthand !== contact.shorthand )
-            console.log(tempContacts)
             state.contacts = tempContacts
         },
         ADD_CONTACT: (state,contact) => {
@@ -32,8 +31,7 @@ const contacts = {
     },
     actions: {
         async fetchContacts(){
-            let data = await mockApi.getAll()
-            console.log(data)
+            await mockApi.getAll()
             return true
         },
         async createContact({commit},contact){
@@ -48,8 +46,6 @@ const contacts = {
             return data
         },
         async deleteContact({commit},contact){
-            console.log('delete contact')
-            console.log(contact)
             let data = await mockApi.delete(contact)
             commit('DELETE_CONTACT', contact)
             return data
@@ -79,7 +75,7 @@ const contacts = {
             return state.contacts
         },
         getContact: state => shorthand => {
-            return state.contacts.filter( x => x.shorthand == shorthand).pop()
+            return state.contacts.find( x => x.shorthand == shorthand)
         }
     }
 }

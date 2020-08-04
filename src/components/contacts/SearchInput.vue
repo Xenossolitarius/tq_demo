@@ -5,8 +5,6 @@
         :type="$options.input_types.SEARCH"
         aria-label="search"
         @input="grabInput($event)"
-        @onError="doError()"
-        
     />
 </div>
 </template>
@@ -28,9 +26,6 @@ export default {
         grabInput(value){
             this.$emit('input', value)
         },
-        doError(){
-            console.log('there is error')
-        }
     }
 }
 </script>

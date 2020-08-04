@@ -1,4 +1,4 @@
-import { required,email,minValue } from 'vuelidate/lib/validators'
+import { required,email,minLength } from 'vuelidate/lib/validators'
 
 export const input_types = {
     DEFAULT: {
@@ -22,7 +22,7 @@ export const input_types = {
     NUMBER: {
         NAME: 'Number',
         VALIDATORS: {
-            minValue: minValue(9),
+            minLength: minLength(9),
             required
         }
     },

@@ -6,7 +6,14 @@
       Are you sure you want to delete this contact?
     </div>
     <WideButton @btn-click="exit()">Close</WideButton>
-    <WideButton class="delete__button" @btn-click="confirm()">Delete</WideButton>
+    <WideButton 
+      :active="true" 
+      class="delete__button" 
+      @btn-click="confirm()"
+      :loading="loading"
+    >
+      Delete
+    </WideButton>
   </div>
 </template>
 
@@ -21,11 +28,17 @@ export default {
     computed: {
       ...mapGetters(['globalContact']),
     },
+    data(){
+      return{
+        loading: false,
+      }
+    },
     methods: {
       ...mapActions(['deleteContact']),
       async confirm(){
-        console.log('delete')
+        this.loading = true
         await this.deleteContact(this.globalContact)
+        this.loading = false
         if(this.$route.name !== 'Home'){
           this.$router.push({name: 'Home'})
         }
@@ -83,9 +96,7 @@ export default {
     font-weight: bold;
 
     &.delete__button{
-      float: right;
-      background-color: $main-color;
-      
+      float: right;      
     }
   }
 

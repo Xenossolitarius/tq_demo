@@ -3,7 +3,7 @@
     <Input
         :type="type"
         @input="grabInput($event)"
-        @onError="doError()"
+        @invalid="$emit('invalid',$event)"
         :value="value"
         :placeholder="placeholder"
     />
@@ -36,9 +36,6 @@ export default {
     methods: {
         grabInput(value){
             this.$emit('input', value)
-        },
-        doError(){
-            console.log('there is error')
         }
     }
 }

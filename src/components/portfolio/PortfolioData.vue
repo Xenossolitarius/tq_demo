@@ -110,7 +110,7 @@ export default {
 
             @media #{$mq-mobile} {
                 position: absolute;
-                top: 135px;
+                top: 87px;
                 margin-left: 101px;
                 font-size: 21px;
                 height: 28px;

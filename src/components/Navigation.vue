@@ -51,6 +51,7 @@ export default {
                 text-decoration: none;
                 font-size: 18px;
                 letter-spacing: 0;
+                transition: all $glob-trans-type $glob-trans-duration;
 
                 @media #{$mq-mobile} {
                     font-size: 14px;

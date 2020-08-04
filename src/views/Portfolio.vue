@@ -1,13 +1,17 @@
 <template>
     <div class="portfolio">
-        <PortfolioImage
-            :key="$route.path" 
-            :contact="contact" 
-            :allowEdit="mode === $options.portfolio_modes.EDIT"
-            v-on:newImage="newImage = $event"
-        />
-        <PortfolioData :contact="contact" v-if="mode === $options.portfolio_modes.DEFAULT" />
-        <PortfolioEdit :contact="contact" :newImage="newImage" v-else />
+        <PortfolioImageTran>
+            <PortfolioImage
+                :key="$route.path" 
+                :contact="contact" 
+                :allowEdit="mode === $options.portfolio_modes.EDIT"
+                v-on:newImage="newImage = $event"
+            />
+        </PortfolioImageTran>
+        <PageTransition>
+            <PortfolioData :contact="contact" v-if="mode === $options.portfolio_modes.DEFAULT" />
+            <PortfolioEdit :contact="contact" :newImage="newImage" v-else />
+        </PageTransition>
     </div>
 </template>
 
@@ -17,13 +21,17 @@ import PortfolioData from '@/components/portfolio/PortfolioData'
 import PortfolioEdit from '@/components/portfolio/PortfolioEdit'
 import PortfolioImage from '@/components/portfolio/PortfolioImage'
 import PortfolioRedirect from '@/components/mixins/PortfolioRedirect'
+import PageTransition from '@/components/transitions/PageTransition'
+import PortfolioImageTran from '@/components/portfolio/PortfolioImageTran'
 export default {
     name: 'Portfolio',
     mixins: [PortfolioRedirect],
     components: {
         PortfolioData,
         PortfolioEdit,
-        PortfolioImage
+        PortfolioImage,
+        PageTransition,
+        PortfolioImageTran
     },
     computed: {
         ...mapGetters(['getContact']),
@@ -68,6 +76,7 @@ export default {
     padding-top: 57px;
     padding-left: 12px;
     padding-right: 12px;
+    position: relative;
 
     @media #{$mq-mobile} {
         padding: 0;

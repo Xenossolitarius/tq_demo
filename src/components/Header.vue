@@ -23,6 +23,7 @@ export default {
 header{
     position: relative;
     width: 100%;
+    max-width: 100%;
     height: 60px;
     background-color: $main-color;
     @include gradient($gradient-direction, $gradient-list);
@@ -31,7 +32,7 @@ header{
         height: 50px;
         box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
         position: fixed;
-        z-index: 1;
+        z-index: 2;
     }
 
     &:after{

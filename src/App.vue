@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <Header/>
-    <router-view/>
+    <PageTransition>
+      <div :key="$route.name" v-if="!loading">
+        <router-view />
+      </div>	
+    </PageTransition>
     <ModalHandler v-if="currentModal !== $options.modal_types.OFF"/>
   </div>
 </template>
@@ -11,12 +15,14 @@ import { mapActions,mapGetters } from 'vuex'
 import modal_types from '@/enums/modal_types.js'
 import Header from '@/components/Header'
 import ModalHandler from '@/components/overlays/ModalHandler'
+import PageTransition from '@/components/transitions/PageTransition'
 export default {
   name: 'App',
   modal_types,
   components: {
     Header,
     ModalHandler,
+    PageTransition,
   },
   computed: {
     ...mapGetters(['currentModal']),
@@ -25,9 +31,13 @@ export default {
     ...mapActions(['fetchContacts'])
   },
   async mounted(){
-    // let works = await this.fetchContacts()
-    // console.log('Mounted')
-    // console.log(works)
+    await this.fetchContacts()
+    this.loading = false
+  },
+  data(){
+    return {
+      loading: true,
+    }
   }
 }
 </script>
@@ -50,6 +60,7 @@ body{
   background-color: $background-color;
   color: $text-color;
   position: relative;
+  overflow: hidden;
 }
 
 a{

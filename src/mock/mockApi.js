@@ -29,7 +29,7 @@ const mockApi = {
         return nameFull
     },
     delayGet: function(){
-       return delay(period).then(() => this.get)
+       return delay(period).then(() => this.get())
     },
     delaySet: function(payload){
         return delay(period).then(() => this.set(payload))

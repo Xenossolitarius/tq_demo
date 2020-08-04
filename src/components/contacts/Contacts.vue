@@ -1,7 +1,9 @@
 <template>
   <div class="contacts">
     <SearchInput @input="grabInput($event)"/>
-    <ContactList :contacts="filtered"/>
+    <PageTransition :reverse="true" :path="true">
+      <ContactList :contacts="filtered" :key="$route.params.filter"/>
+    </PageTransition>
   </div>
 </template>
 
@@ -9,8 +11,14 @@
 import { mapGetters } from 'vuex'
 import SearchInput from '@/components/contacts/SearchInput'
 import ContactList from '@/components/contacts/ContactList'
+import PageTransition from '@/components/transitions/PageTransition'
 export default {
   name: "Contacts",
+    components: {
+    SearchInput,
+    ContactList,
+    PageTransition
+  },
   computed:{
     ...mapGetters(['filterContacts']),
     filtered(){
@@ -24,10 +32,6 @@ export default {
         routeFilter: undefined
       },
     }
-  },
-  components: {
-    SearchInput,
-    ContactList
   },
   methods: {
     grabInput(value){

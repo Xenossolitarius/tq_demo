@@ -1,6 +1,8 @@
 <template>
     <div class="portfolio">
-        <PortfolioImage :allowEdit="true" v-on:newImage="newImage = $event" />
+        <PortfolioImageTran>
+            <PortfolioImage :allowEdit="true" v-on:newImage="newImage = $event" />
+        </PortfolioImageTran>
         <PortfolioEdit :newImage="newImage" :mode="$options.portfolio_modes.NEW"/>
     </div>
 </template>
@@ -10,12 +12,14 @@ import { mapGetters } from 'vuex'
 import portfolio_modes from '@/enums/portfolio_modes.js'
 import PortfolioEdit from '@/components/portfolio/PortfolioEdit'
 import PortfolioImage from '@/components/portfolio/PortfolioImage'
+import PortfolioImageTran from '@/components/portfolio/PortfolioImageTran'
 export default {
     name: 'NewPortfolio',
     portfolio_modes,
     components: {
         PortfolioEdit,
-        PortfolioImage
+        PortfolioImage,
+        PortfolioImageTran
     },
     computed: {
         ...mapGetters(['getContact']),
@@ -36,6 +40,7 @@ export default {
     padding-top: 57px;
     padding-left: 12px;
     padding-right: 12px;
+    position: relative;
 
     @media #{$mq-mobile} {
         padding: 0;

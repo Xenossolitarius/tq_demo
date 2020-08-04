@@ -21,6 +21,7 @@ import modal_types from '@/enums/modal_types.js'
 const ModalControlInnerTran = () => import(/* webpackChunkName: "modal" */ './transitions/ModalControlInnerTran')
 const ModalControlTran = () => import(/* webpackChunkName: "modal" */ './transitions/ModalControlTran')
 const DeleteModal = () => import(/*webpackChunkName: "modal" */ './DeleteModal')
+const LoadModal = () => import(/*webpackChunkName: "modal" */ './LoadModal')
 
 export default {
     name: 'ModalControl',
@@ -29,6 +30,7 @@ export default {
         ModalControlInnerTran,
         ModalControlTran,
         DeleteModal,
+        LoadModal
     },
     data(){
         return{
@@ -37,11 +39,14 @@ export default {
         }
     },
     created(){
-        const { modal_types} = this.$options
+        const { modal_types } = this.$options
 
         switch(this.currentModal){
             case modal_types.DELETE:
                 this.controlModal = DeleteModal
+                break
+            case modal_types.LOAD:
+                this.controlModal = LoadModal
                 break
             default:
                 this.closeModal()

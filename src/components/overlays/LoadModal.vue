@@ -1,32 +1,29 @@
 <template>
-  <div class="delete__modal">
-    <div class="delete__modal__label">Delete</div>
-    <hr class="delete__modal__separator">
-    <div class="delete__modal__message">
-      Are you sure you want to delete this contact?
+  <div class="load__modal">
+    <div class="load__modal__label">load</div>
+    <hr class="load__modal__separator">
+    <div class="load__modal__message">
+      Your storage is empty. Do you want to import some mock data?
     </div>
     <WideButton @btn-click="exit()">Close</WideButton>
     <WideButton 
       :active="true" 
-      class="delete__button" 
+      class="load__button" 
       @btn-click="confirm()"
       :loading="loading"
     >
-      Delete
+      Load
     </WideButton>
   </div>
 </template>
 
 <script>
-import {mapActions,mapGetters} from 'vuex'
+import {mapActions} from 'vuex'
 import WideButton from '@/components/materials/WideButton'
 export default {
-    name: 'DeleteModal',
+    name: 'LoadModal',
     components: {
       WideButton,
-    },
-    computed: {
-      ...mapGetters(['globalContact']),
     },
     data(){
       return{
@@ -34,10 +31,10 @@ export default {
       }
     },
     methods: {
-      ...mapActions(['deleteContact']),
+      ...mapActions(['loadContacts']),
       async confirm(){
         this.loading = true
-        await this.deleteContact(this.globalContact)
+        await this.loadContacts()
         this.loading = false
         if(this.$route.name !== 'Home'){
           this.$router.push({name: 'Home'})
@@ -53,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss">
-.delete__modal {
+.load__modal {
   position: relative;
   display: block;
   width: 480px;
@@ -95,7 +92,7 @@ export default {
     font-size: 14px;
     font-weight: bold;
 
-    &.delete__button{
+    &.load__button{
       float: right;      
     }
   }

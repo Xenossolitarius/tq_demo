@@ -221,7 +221,7 @@ export default {
                     }
                 })
                 val.numbers.map( number => {
-                    Object.values(number).map(field => {
+                    Object.values(number).map( field => {
                         if(typeof(field) === "boolean" && field){
                             invalid = true
                         }

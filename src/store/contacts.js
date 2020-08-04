@@ -1,14 +1,16 @@
 import mockContacts from '@/mock/mockData.js'
 import mockApi from '@/mock/mockApi.js'
-
-mockApi.set(mockContacts)
+import modal_types from '@/enums/modal_types.js'
 
 const contacts = {
     state: () => ({
-        //imitate existing api
-        contacts: mockContacts,
+        contacts: [],
     }),
     mutations: {
+        IMPORT_CONTACTS: state => {
+            state.contacts = mockContacts
+            mockApi.set(mockContacts)
+        },
         SET_CONTACTS: (state,contacts) => {
             state.contacts = contacts
         },
@@ -30,9 +32,20 @@ const contacts = {
         }
     },
     actions: {
-        async fetchContacts(){
-            await mockApi.getAll()
-            return true
+        async loadContacts({commit}){
+            commit('IMPORT_CONTACTS')
+        },
+        async fetchContacts({commit,dispatch}){
+            let data = await mockApi.getAll()
+            if(data === null){
+                dispatch('setCurrentModal', modal_types.LOAD)
+                return
+            }else{
+                commit('SET_CONTACTS', data)
+                return true
+            }
+            
+           
         },
         async createContact({commit},contact){
             let data = await mockApi.new(contact)

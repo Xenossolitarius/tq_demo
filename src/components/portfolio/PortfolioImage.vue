@@ -17,6 +17,7 @@
 <script>
 import CloseIconLarge from '@/assets/svg/CloseIconLarge'
 import UploadIcon from '@/assets/svg/UploadIcon'
+
 export default {
     name: 'PortfolioImage',
     components: {
@@ -82,15 +83,18 @@ export default {
     overflow: hidden;
     cursor: pointer;
     pointer-events: none;
+    z-index: 1;
+    transition: all $glob-trans-type $glob-trans-duration;
 
     @media #{$mq-mobile} {
         position: absolute;
-        top: 122px;
+        top: 74px;
+        left: 0;
         width: 56px;
         height: 56px;
         min-width: 56px;
-        justify-self: start;
         margin-left: 22px;
+        transform: translateX(0%);
     }
 
     &.allowEdit{
@@ -99,6 +103,7 @@ export default {
         @media #{$mq-mobile} {
             width: 156px;
             height: 156px;
+            min-width: 156px;
             margin-left: 0;
             left: 50%;
             transform: translateX(-50%);
@@ -131,6 +136,7 @@ export default {
             background-color: $overlay-color;
 
             .close-icon-large{
+                transform: translateY(0%);
                 opacity: 1;
             }
 
@@ -147,6 +153,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: all $glob-trans-type $glob-trans-duration;
 
         @media #{$mq-mobile} {
             width: 56px;
@@ -155,9 +162,9 @@ export default {
 
         .close-icon-large{
             opacity: 0;
+            transform: translateY(25px);
+            transition: all $glob-trans-type $glob-trans-duration;
         }
-
-
     }
 }
 </style>

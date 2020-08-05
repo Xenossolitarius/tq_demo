@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss">
-.load__modal {
+.delete__modal {
   position: relative;
   display: block;
   width: 480px;
@@ -64,9 +64,14 @@ export default {
   box-shadow: 0 0 14px 0 $modal-bs-color;
   font-size: 16px;
 
+  @media #{$mq-mobile} {
+    width: 315px;
+    height: 330px;
+  }
+
   &__label{
     margin-top: 20px;
-    margin-left: 31px;
+    margin-left: 30px;
     font-family: 'Lato';
     font-weight: bold;
     text-align: left;
@@ -78,10 +83,19 @@ export default {
     height: 2px;
     width: 480px;
     border: 1px solid $separator-color;
+
+    @media #{$mq-mobile} {
+      width: 315px;
+    }
   }
 
   &__message{
     margin-top: 29px;
+    @media #{$mq-mobile} {
+      margin-left: 30px;
+      margin-right: 30px;
+      line-height: 28px;
+    }
   }
 
   .wide__button{
@@ -92,10 +106,26 @@ export default {
     font-size: 14px;
     font-weight: bold;
 
-    &.load__button{
-      float: right;      
+    @media #{$mq-mobile} {
+      float: none;
+      margin-top: 18px;
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    &.delete__button{
+      float: right;
+      
+      @media #{$mq-mobile} {
+        float: none;
+        margin-top: 50px;
+        bottom: 90px;
+      }      
     }
   }
-
 }
 </style>

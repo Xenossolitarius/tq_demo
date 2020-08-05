@@ -82,12 +82,16 @@ export default {
         margin: 0 auto;
         display: flex;
         align-items: center;
-        width: 1080px;
+        width: 500px;
         min-height: 100%;
         will-change: transform;
         backface-visibility: hidden;
         perspective: 1000px;
         transform: translate3d(0,0,0);
+
+        @media #{$mq-mobile} {
+            width: 315px;
+        }
     }
 
 }

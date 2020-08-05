@@ -1,16 +1,13 @@
 <template>
     <div class="portfolio">
-        <PortfolioImageTran>
-            <PortfolioImage
-                :key="$route.path" 
-                :contact="contact" 
-                :allowEdit="mode === $options.portfolio_modes.EDIT"
-                v-on:newImage="newImage = $event"
-            />
-        </PortfolioImageTran>
+        <PortfolioImage 
+            :contact="contact" 
+            :allowEdit="isEditable"
+            v-on:newImage="newImage = $event"
+        />
         <PageTransition>
             <PortfolioData :contact="contact" v-if="mode === $options.portfolio_modes.DEFAULT" />
-            <PortfolioEdit :contact="contact" :newImage="newImage" v-else />
+            <PortfolioEdit :contact="contact" :newImage="newImage" :mode="mode" v-else />
         </PageTransition>
     </div>
 </template>
@@ -22,7 +19,6 @@ import PortfolioEdit from '@/components/portfolio/PortfolioEdit'
 import PortfolioImage from '@/components/portfolio/PortfolioImage'
 import PortfolioRedirect from '@/components/mixins/PortfolioRedirect'
 import PageTransition from '@/components/transitions/PageTransition'
-import PortfolioImageTran from '@/components/portfolio/PortfolioImageTran'
 export default {
     name: 'Portfolio',
     mixins: [PortfolioRedirect],
@@ -31,14 +27,23 @@ export default {
         PortfolioEdit,
         PortfolioImage,
         PageTransition,
-        PortfolioImageTran
     },
     computed: {
         ...mapGetters(['getContact']),
+        isEditable(){
+            return this.mode === this.$options.portfolio_modes.EDIT || this.mode === this.$options.portfolio_modes.NEW
+        }
     },
     data(){
         return {
-            contact: null,
+            contact: {
+                shorthand: '',
+                imgUrl: null,
+                nameFull: '',
+                email: '',
+                favorite: false,
+                numbers: []
+            },
             mode: null,
             newImage: undefined,
         }
@@ -51,6 +56,7 @@ export default {
             }else{
                 this.mode = this.$options.portfolio_modes.DEFAULT
             }
+
             if(shorthand){
                 this.contact = this.getContact(shorthand)
             }
